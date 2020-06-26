@@ -95,10 +95,10 @@ d3.csv('/assets/data/data.csv')
         let ymin = d3.min(health_poverty_data.map(d => parseFloat(d['healthcare'])));
         let ymax = d3.max(health_poverty_data.map(d => parseFloat(d['healthcare'])));
 
-        console.log(`YAxis max info ${ymax}`)
-        console.log(typeof (ymax));
-        console.log(`YAxis min info ${ymin}`)
-        console.log(typeof (ymin)); //End test
+        // console.log(`YAxis max info ${ymax}`)
+        // console.log(typeof (ymax));
+        // console.log(`YAxis min info ${ymin}`)
+        // console.log(typeof (ymin)); //End test
 
 
         const yScale = d3.scaleLinear()
@@ -111,10 +111,10 @@ d3.csv('/assets/data/data.csv')
         let xmin = d3.min(health_poverty_data, d => parseFloat(d[XAxis]))
         let xmax = d3.max(health_poverty_data, d => parseFloat(d[XAxis]))
 
-        console.log(`XAxis max${xmax}`)
-        console.log(typeof (xmax));
-        console.log(`YAxis min info ${xmin}`)
-        console.log(typeof (xmin)); //End test
+        // console.log(`XAxis max${xmax}`)
+        // console.log(typeof (xmax));
+        // console.log(`YAxis min info ${xmin}`)
+        // console.log(typeof (xmin)); //End test
 
 
         const xScale = d3.scaleLinear()
