@@ -85,16 +85,20 @@ function UpdateBars(circleGroup, newXScale) {
 }
 
 // Tooltip HTML declaration
-const toolTip = d3.select('body').append('div')
-  .attr('class', 'd3-tip');
+// const toolTip = d3.select('body').append('div')
+//   .attr('class', 'd3-tip');
 
 d3.csv('/assets/data/data.csv')
     .then(function (health_poverty_data) {
-        console.log(health_poverty_data)
+        // console.log("***********total info****************")
+        // console.log(health_poverty_data)
         // Y axis: Testing to see if there is a string vs integer
         let ymin = d3.min(health_poverty_data.map(d => parseFloat(d['healthcare'])));
         let ymax = d3.max(health_poverty_data.map(d => parseFloat(d['healthcare'])));
-
+        var state_abbr = health_poverty_data.map(d => d.abbr);
+        console.log("**********state_abbreviation*****************");
+        console.log(state_abbr);
+        
         // console.log(`YAxis max info ${ymax}`)
         // console.log(typeof (ymax));
         // console.log(`YAxis min info ${ymin}`)
@@ -110,6 +114,7 @@ d3.csv('/assets/data/data.csv')
 
         let xmin = d3.min(health_poverty_data, d => parseFloat(d[XAxis]))
         let xmax = d3.max(health_poverty_data, d => parseFloat(d[XAxis]))
+        // var state = 
 
         // console.log(`XAxis max${xmax}`)
         // console.log(typeof (xmax));
@@ -139,6 +144,7 @@ d3.csv('/assets/data/data.csv')
             .call(yAxis_func);
 
         let checkP = health_poverty_data[0].poverty
+        console.log("*********Testing Data***************")
         console.log(checkP)
         console.log(typeof (checkP))
 
@@ -148,6 +154,11 @@ d3.csv('/assets/data/data.csv')
             .data(health_poverty_data)
             .enter()
             .append('circle')
+            .attr('text', d => d.abbr)
+            // toolTip.show(d.abbr, this);
+            // .append("text")
+            // .attr("cx", function(d){return -20})
+            // .text(function(d){return d.abbr})
             // .attr('cx', d => d['poverty'])
             .attr('cx', d => xScale(parseFloat(d['poverty'])))
             // .attr('cy', d => d['healthcare'])
@@ -157,23 +168,49 @@ d3.csv('/assets/data/data.csv')
             // .attr('fill', d => [d['abbr']]);
             .attr('fill', 'green')
 
-            // const toolTip = d3.select('body').append('div')
-            // .attr('class', 'tooltip');
+        // const toolTip = d3.select('body').append('div')
+        //     .attr('class', 'tooltip');
+        //     .html(function(d) {
+        //         return (`${d.abbr}`);
+        //     });
+
+        // var toolTip = d3.tip()
+            // var toolTip = d3.select('body').append('div')
+            //     .attr("class", "tooltip")
+            //     .offset([80, -60])
+            //     .html(function(d) {
+            //     return (`${d.abbr}`);
+            //     });
+
+                // Step 7: Create tooltip in the chart
+        // ==============================
+        // chartGroup.call(toolTip);
+
+        // Step 8: Create event listeners to display and hide the tooltip
+        // ==============================
+        // circlesGroup.on("click", function(data) {
+        // toolTip.show(data, this);
+        // })
         
             circleGroup.on('mouseover', function(d, i){
                 d3.select(this)
                 .transition()
                 .duration(300) 
                 .attr('r', 10)
+                // .attr('text', d => d.abbr)
                 .attr('fill', 'orange')
-                .attr('text', d => d['abbr'])
-                toolTip.style('display', 'block');
+                .style("text-anchor", "middle");
+                
+                // .attr('text', state_abbr)
+                // .attr('text', d => d['abbr'])
 
-                toolTip.html(
-                  `State abrv: <strong> ${d['abbr']}</strong>`
-                )
-                  .style('left', d3.event.pageX + 'px')
-                  .style('top', d3.event.pageY + 'px');
+                // toolTip.style('display', 'block');
+
+                // toolTip.html(
+                //   `State abbrv: <strong> ${state_abbr[i]}</strong>`
+                // // )
+                //   .style('left', d3.event.pageX + 'px')
+                //   .style('top', d3.event.pageY + 'px');
 
             })
 
@@ -182,7 +219,7 @@ d3.csv('/assets/data/data.csv')
                 .transition()
                 .attr('r', 8)
                 .attr('fill', 'green')
-                toolTip.style('display', 'none');
+                // toolTip.style('display', 'none');
 
             })
 
