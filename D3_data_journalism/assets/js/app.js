@@ -197,7 +197,7 @@ d3.csv('/assets/data/data.csv')
                 .transition()
                 .duration(300) 
                 .attr('r', 10)
-                // .attr('text', d => d.abbr)
+                .attr('text', d => d.abbr)
                 .attr('fill', 'orange')
                 .style("text-anchor", "middle");
                 
