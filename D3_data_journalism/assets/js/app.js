@@ -139,7 +139,7 @@ d3.csv('/assets/data/data.csv')
             .call(xAxis_func);
 
         // Assign YAxis to variable so we can update it later
-        svg.append('g')
+        let yAxis_g = svg.append('g')
             .attr('id', 'yaxis')
             .call(yAxis_func);
 
@@ -153,8 +153,9 @@ d3.csv('/assets/data/data.csv')
         const circleGroup = svg.selectAll('circle')
             .data(health_poverty_data)
             .enter()
-            .append('circle')
-            .attr('text', d => d.abbr)
+            // .append('g')
+        circleGroup.append('circle')
+
             // toolTip.show(d.abbr, this);
             // .append("text")
             // .attr("cx", function(d){return -20})
@@ -167,6 +168,31 @@ d3.csv('/assets/data/data.csv')
             .classed('moreInfo', true)
             // .attr('fill', d => [d['abbr']]);
             .attr('fill', 'green')
+  
+            // .attr('text', d => d.abbr)   
+        // circleGroup.append("circle")
+        //     .attr('r', 8)
+            // .attr('fill', 'green')
+    
+        const textGroup = svg.selectAll('text')
+            .data(health_poverty_data)
+            .enter()
+
+        textGroup.append("text")
+
+        // .attr("dx", function(d){return -20})
+            .attr('cx', d => xScale(parseFloat(d['poverty'])))
+            // .attr('cy', d => d['healthcare'])
+            .attr('cy', d => yScale(d['healthcare']))
+            .classed('text_info', true)
+            // .attr("text-anchor", "middle") 
+            // .attr('alignment-baseline', 'middle')
+            .style('font-size', 10)
+            .style('fill', 'black')
+            .attr('stroke-width', 1)
+            .text(function(d){return d.abbr})
+
+
 
         // const toolTip = d3.select('body').append('div')
         //     .attr('class', 'tooltip');
@@ -197,9 +223,11 @@ d3.csv('/assets/data/data.csv')
                 .transition()
                 .duration(300) 
                 .attr('r', 10)
-                .attr('text', d => d.abbr)
                 .attr('fill', 'orange')
+                .attr('text', d => d.abbr)
+                .style('font-size', 10)
                 .style("text-anchor", "middle");
+                
                 
                 // .attr('text', state_abbr)
                 // .attr('text', d => d['abbr'])
@@ -219,12 +247,23 @@ d3.csv('/assets/data/data.csv')
                 .transition()
                 .attr('r', 8)
                 .attr('fill', 'green')
+                .style('font-size', 10)
+                .attr('text', d => d.abbr)
                 // toolTip.style('display', 'none');
 
             })
 
-           
-               
+            // var elem = svg.selectAll("g")
+            //     .data(health_poverty_data.abbr)
+ 
+            // var elemEnter = elem.enter()
+            //     .append("g")
+            //     .attr("transform", function(d){return "translate("+d.x+",80)"})
+            //                /* Create the text for each block */
+            
+            // elemEnter.append("text")
+
+                
              
 
     })
