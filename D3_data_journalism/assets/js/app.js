@@ -177,30 +177,6 @@ d3.csv('/assets/data/data.csv')
             .attr('fill', 'white')
 
 
-
-        // const toolTip = d3.select('body').append('div')
-        //     .attr('class', 'tooltip');
-        //     .html(function(d) {
-        //         return (`${d.abbr}`);
-        //     });
-
-        // var toolTip = d3.tip()
-            // var toolTip = d3.select('body').append('div')
-            //     .attr("class", "tooltip")
-            //     .offset([80, -60])
-            //     .html(function(d) {
-            //     return (`${d.abbr}`);
-            //     });
-
-                // Step 7: Create tooltip in the chart
-        // ==============================
-        // chartGroup.call(toolTip);
-
-        // Step 8: Create event listeners to display and hide the tooltip
-        // ==============================
-        // circlesGroup.on("click", function(data) {
-        // toolTip.show(data, this);
-        // })
         
             circleGroup.on('mouseover', function(d, i){
                 d3.select(this)
@@ -208,21 +184,6 @@ d3.csv('/assets/data/data.csv')
                 .duration(300) 
                 .attr('r', 10)
                 .attr('fill', 'orange')
-                // .attr('text', d => d.abbr)
-                // .style('font-size', 10)
-                // .style("text-anchor", "middle");
-                
-                
-                // .attr('text', state_abbr)
-                // .attr('text', d => d['abbr'])
-
-                // toolTip.style('display', 'block');
-
-                // toolTip.html(
-                //   `State abbrv: <strong> ${state_abbr[i]}</strong>`
-                // // )
-                //   .style('left', d3.event.pageX + 'px')
-                //   .style('top', d3.event.pageY + 'px');
 
             })
 
@@ -236,16 +197,6 @@ d3.csv('/assets/data/data.csv')
                 // toolTip.style('display', 'none');
 
             })
-
-            // var elem = svg.selectAll("g")
-            //     .data(health_poverty_data.abbr)
- 
-            // var elemEnter = elem.enter()
-            //     .append("g")
-            //     .attr("transform", function(d){return "translate("+d.x+",80)"})
-            //                /* Create the text for each block */
-            
-            // elemEnter.append("text")
 
                 
              
