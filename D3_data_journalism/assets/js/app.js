@@ -155,42 +155,26 @@ d3.csv('/assets/data/data.csv')
             .enter()
             // .append('g')
         circleGroup.append('circle')
-
-            // toolTip.show(d.abbr, this);
-            // .append("text")
-            // .attr("cx", function(d){return -20})
-            // .text(function(d){return d.abbr})
-            // .attr('cx', d => d['poverty'])
             .attr('cx', d => xScale(parseFloat(d['poverty'])))
-            // .attr('cy', d => d['healthcare'])
             .attr('cy', d => yScale(d['healthcare']))
             .attr('r', 8)
             .classed('moreInfo', true)
-            // .attr('fill', d => [d['abbr']]);
+            // .attr('fill', d => [d['abbr']])
             .attr('fill', 'green')
-  
-            // .attr('text', d => d.abbr)   
-        // circleGroup.append("circle")
-        //     .attr('r', 8)
-            // .attr('fill', 'green')
-    
-        const textGroup = svg.selectAll('text')
-            .data(health_poverty_data)
-            .enter()
 
-        textGroup.append("text")
 
-        // .attr("dx", function(d){return -20})
-            .attr('cx', d => xScale(parseFloat(d['poverty'])))
-            // .attr('cy', d => d['healthcare'])
-            .attr('cy', d => yScale(d['healthcare']))
-            .classed('text_info', true)
-            // .attr("text-anchor", "middle") 
-            // .attr('alignment-baseline', 'middle')
-            .style('font-size', 10)
-            .style('fill', 'black')
-            .attr('stroke-width', 1)
-            .text(function(d){return d.abbr})
+        circleGroup.append("text")
+            // We return the abbreviation to .text, which makes the text the abbreviation.
+            .text(function(d) {
+            return d.abbr;
+            })
+            .attr('dx', d => xScale(parseFloat(d['poverty'])))
+            .attr("text-anchor", "middle") 
+            .attr('alignment-baseline', 'middle')
+            .attr('dy', d => yScale(d['healthcare']))
+            .attr("class", "text_info")
+            .style('font-size', 9)
+            .attr('fill', 'white')
 
 
 
@@ -224,9 +208,9 @@ d3.csv('/assets/data/data.csv')
                 .duration(300) 
                 .attr('r', 10)
                 .attr('fill', 'orange')
-                .attr('text', d => d.abbr)
-                .style('font-size', 10)
-                .style("text-anchor", "middle");
+                // .attr('text', d => d.abbr)
+                // .style('font-size', 10)
+                // .style("text-anchor", "middle");
                 
                 
                 // .attr('text', state_abbr)
@@ -248,7 +232,7 @@ d3.csv('/assets/data/data.csv')
                 .attr('r', 8)
                 .attr('fill', 'green')
                 .style('font-size', 10)
-                .attr('text', d => d.abbr)
+                // .attr('text', d => d.abbr)
                 // toolTip.style('display', 'none');
 
             })
